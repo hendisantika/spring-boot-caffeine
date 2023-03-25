@@ -1,6 +1,9 @@
 package com.hendisantika.springbootcaffeine.service;
 
+import com.hendisantika.springbootcaffeine.config.NetworkSpeedSimulator;
+import com.hendisantika.springbootcaffeine.data.Book;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 /**
@@ -17,4 +20,10 @@ import org.springframework.stereotype.Component;
 public class BookService {
     @Value("${demo.wait.duration:3000}")
     private long waitDuration;
+
+    @Cacheable(cacheNames = "getBookWithCache", key = "#isbn")
+    public Book findBook(String isbn) {
+        NetworkSpeedSimulator.slowSpeed(waitDuration);
+        return new Book("0134685997", "Effective Java", 1);
+    }
 }
