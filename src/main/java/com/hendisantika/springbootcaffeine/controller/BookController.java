@@ -2,7 +2,7 @@ package com.hendisantika.springbootcaffeine.controller;
 
 import com.hendisantika.springbootcaffeine.data.Book;
 import com.hendisantika.springbootcaffeine.service.BookService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("book")
-@RequiredArgsConstructor
 public class BookController {
 
-    private final BookService bookService;
+    @Autowired
+    private BookService bookService;
 
     @GetMapping("/{isbn}")
     public Book findBook(@PathVariable(required = true, value = "isbn") String isbn) {

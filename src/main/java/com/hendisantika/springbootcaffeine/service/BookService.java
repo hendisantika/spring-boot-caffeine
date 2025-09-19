@@ -24,6 +24,10 @@ public class BookService {
     @Cacheable(cacheNames = "getBookWithCache", key = "#isbn")
     public Book findBook(String isbn) {
         NetworkSpeedSimulator.slowSpeed(waitDuration);
-        return new Book("0134685997", "Effective Java", 1);
+        Book book = new Book();
+        book.setIsbn10("0134685997");
+        book.setTitle("Effective Java");
+        book.setFormat(1);
+        return book;
     }
 }
